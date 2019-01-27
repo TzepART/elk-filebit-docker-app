@@ -3,10 +3,10 @@ services:
   filebeat:
     image: olinicola/filebeat:1.2.3
     volumes:
-      - /Users/artem/PhpstormProjects/elk_app/log/nginx:/etc/logs/nginx # логи nginx
-      - /Users/artem/PhpstormProjects/elk_app/filebeat:/etc/filebeat
-      - /Users/artem/PhpstormProjects/elk_app/filebeat/tmp:/tmp/filebeat
-      - /Users/artem/PhpstormProjects/elk_app/filebeat/certs:/etc/pki/tls/certs
+      - /your/path/to/project/elk_app/log/nginx:/etc/logs/nginx # nginx logs
+      - /your/path/to/project/elk_app/filebeat:/etc/filebeat
+      - /your/path/to/project/elk_app/filebeat/tmp:/tmp/filebeat
+      - /your/path/to/project/elk_app/filebeat/certs:/etc/pki/tls/certs
     links:
       - "logstash"
     depends_on:
