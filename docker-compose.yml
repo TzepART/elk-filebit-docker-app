@@ -1,0 +1,39 @@
+version: '3'
+services:
+  filebeat:
+    image: olinicola/filebeat:1.2.3
+    volumes:
+      - /Users/artem/PhpstormProjects/elk_app/log/nginx:/etc/logs/nginx # логи nginx
+      - /Users/artem/PhpstormProjects/elk_app/filebeat:/etc/filebeat
+      - /Users/artem/PhpstormProjects/elk_app/filebeat/tmp:/tmp/filebeat
+      - /Users/artem/PhpstormProjects/elk_app/filebeat/certs:/etc/pki/tls/certs
+    links:
+      - "logstash"
+    depends_on:
+      - "logstash"
+    #entrypoint: ./time-to-start.sh
+
+  elasticsearch:
+    image: elasticsearch:5.6
+    restart: always
+    ports:
+      - 9200:9200
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+
+  logstash:
+    build: logstash
+    restart: always
+    command: logstash -f /config-dir/logstash.conf
+    ports:
+      - 5044:5044
+    links:
+      - elasticsearch
+
+  kibana:
+    image: kibana:5
+    restart: always
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch
