@@ -2,4 +2,3 @@
 elasticsearch/data/elasticsearch/
 filebeat/certs/
 filebeat/tmp/
-log/
