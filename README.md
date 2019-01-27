@@ -1,5 +1,5 @@
 # ELK&Filebit Docker
-This example on base this [ELK-Docker project](https://github.com/sqshq/ELK-docker) with connecting Filebit
+This example on base this [ELK-Docker project](https://github.com/sqshq/ELK-docker) with connecting Filebeat
 
 There are using:
 * [ElasticSearch](https://www.elastic.co/products/elasticsearch) to store and index log data.
