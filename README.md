@@ -27,3 +27,5 @@ Start everything with one command:
 ``
 docker-compose up
 ``
+
+After start app will be available at http://localhost:5601
