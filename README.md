@@ -23,6 +23,7 @@ cp .env.dist .env
 
 
 Start everything with one command:
+
 ``
 docker-compose up
 ``
