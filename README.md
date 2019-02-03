@@ -12,7 +12,17 @@ There are using:
 2. Clone this repository and hit `docker-compose build`
 
 ## Usage
+Declare environment variables for FileBeat.
+For this, you should copy `.env.dist` as `.env`:
+
+``
+cp .env.dist .env
+``
+
+... and set needed paths.
+
+
 Start everything with one command:
-```
+``
 docker-compose up
-```
+``
