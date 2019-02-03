@@ -2,4 +2,4 @@
 elasticsearch/data/elasticsearch/
 filebeat/certs/
 filebeat/tmp/
-filebeat_variables.env
+.env

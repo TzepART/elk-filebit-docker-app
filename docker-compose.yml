@@ -2,8 +2,6 @@ version: '3'
 services:
   filebeat:
     image: olinicola/filebeat:1.2.3
-    env_file:
-      - filebeat_variables.env
     volumes:
       - ${FILEBITE_NGINX_DIR}:/etc/logs/nginx # nginx logs
       - ${FILEBITE_BASE_DIR}:/etc/filebeat
