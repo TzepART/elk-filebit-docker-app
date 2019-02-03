@@ -2,11 +2,13 @@ version: '3'
 services:
   filebeat:
     image: olinicola/filebeat:1.2.3
+    env_file:
+      - filebeat_variables.env
     volumes:
-      - /your/path/to/project/elk_app/log/nginx:/etc/logs/nginx # nginx logs
-      - /your/path/to/project/elk_app/filebeat:/etc/filebeat
-      - /your/path/to/project/elk_app/filebeat/tmp:/tmp/filebeat
-      - /your/path/to/project/elk_app/filebeat/certs:/etc/pki/tls/certs
+      - ${FILEBITE_NGINX_DIR}:/etc/logs/nginx # nginx logs
+      - ${FILEBITE_BASE_DIR}:/etc/filebeat
+      - ${FILEBITE_TMP_DIR}:/tmp/filebeat
+      - ${FILEBITE_CERTS_DIR}:/etc/pki/tls/certs
     links:
       - "logstash"
     depends_on:
