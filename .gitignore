@@ -1,5 +1,6 @@
 .idea
-elasticsearch/data/elasticsearch/
+elasticsearch/data/*
+!elasticsearch/data/.gitempty
 filebeat/certs/
 filebeat/tmp/
 log/nginx/*
