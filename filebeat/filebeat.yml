@@ -23,7 +23,7 @@ filebeat.prospectors:
   # * stdin: Reads the standard in
 
   #------------------------------ Log prospector --------------------------------
-  - input_type: nginx-access
+  - input_type: log
 
     # Paths that should be crawled and fetched. Glob based paths.
     # To fetch all ".log" files from a specific level of subdirectories
@@ -31,7 +31,7 @@ filebeat.prospectors:
     # For each file found under this path, a harvester is started.
     # Make sure not file is defined twice as this can lead to unexpected behaviour.
     paths:
-      - /var/log/filebeat/access.log
+      - /var/log/*/*.log
 
       # Configure the file encoding for reading files with international characters
       # following the W3C recommendation for HTML5 (http://www.w3.org/TR/encoding).
