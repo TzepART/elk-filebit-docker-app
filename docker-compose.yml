@@ -1,17 +1,19 @@
 version: '3'
 services:
   filebeat:
-    image: olinicola/filebeat:1.2.3
+    build: filebeat/
     volumes:
-      - ${FILEBITE_NGINX_DIR}:/etc/logs/nginx # nginx logs
       - ${FILEBITE_BASE_DIR}:/etc/filebeat
-      - ${FILEBITE_TMP_DIR}:/tmp/filebeat
-      - ${FILEBITE_CERTS_DIR}:/etc/pki/tls/certs
+      - ${FILEBITE_NGINX_DIR}:/var/log/filebeat
+#      - ${FILEBITE_TMP_DIR}:/tmp/filebeat
+#      - ${FILEBITE_CERTS_DIR}:/etc/pki/tls/certs
+#    networks:
+#      - docker_elk
+#    depends_on:
+#      - elasticsearch
+    restart: unless-stopped
     links:
-      - "logstash"
-    depends_on:
-      - "logstash"
-    #entrypoint: ./time-to-start.sh
+      - logstash
 
   elasticsearch:
     image: elasticsearch:5.6
