@@ -1,7 +1,9 @@
-FROM logstash:2.2
+FROM docker.elastic.co/logstash/logstash:6.6.0
 
-# add custom config
-COPY logstash.conf /config-dir/logstash.conf
+# https://www.elastic.co/guide/en/logstash/current/docker-config.html
 
-# add templates
-COPY ./templates/ /config-dir/templates/
+RUN rm -f /usr/share/logstash/pipeline/logstash.conf
+
+ADD pipeline/ /usr/share/logstash/pipeline/
+ADD config/ /usr/share/logstash/config/
+ADD templates/ /usr/share/logstash/templates/
