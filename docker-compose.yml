@@ -1,41 +1,49 @@
 version: '3'
 services:
-  filebeat:
-    build: filebeat/
-    volumes:
-      - ${FILEBITE_BASE_DIR}:/etc/filebeat
-      - ${FILEBITE_NGINX_DIR}:/var/log/filebeat
-#      - ${FILEBITE_TMP_DIR}:/tmp/filebeat
-#      - ${FILEBITE_CERTS_DIR}:/etc/pki/tls/certs
-#    networks:
-#      - docker_elk
-#    depends_on:
-#      - elasticsearch
-    restart: unless-stopped
-    links:
-      - logstash
+  kibana:
+    image: kibana:6.6.0
+    restart: always
+    networks:
+      - docker_elk
+    ports:
+      - 5601:5601
 
   elasticsearch:
     image: elasticsearch:6.6.0
     restart: always
     ports:
       - 9200:9200
+    networks:
+      - docker_elk
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
+    depends_on:
+      - kibana
 
   logstash:
     build: logstash/
     restart: always
-    command: logstash -f /config-dir/logstash.conf
+    command: logstash -f /usr/share/logstash/config/logstash.conf
+    networks:
+      - docker_elk
     ports:
       - 5044:5044
-    links:
+    depends_on:
       - elasticsearch
 
-  kibana:
-    image: kibana:6.6.0
-    restart: always
-    ports:
-      - 5601:5601
-    links:
-      - elasticsearch
+  filebeat:
+    build: filebeat/
+    restart: unless-stopped
+    volumes:
+      - ${FILEBITE_BASE_DIR}:/etc/filebeat
+      - ${FILEBITE_NGINX_DIR}:/var/log/filebeat
+#      - ${FILEBITE_TMP_DIR}:/tmp/filebeat
+#      - ${FILEBITE_CERTS_DIR}:/etc/pki/tls/certs
+    networks:
+      - docker_elk
+    depends_on:
+      - logstash
+
+networks:
+  docker_elk:
+    driver: bridge
