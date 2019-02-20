@@ -654,13 +654,13 @@ output.logstash:
   #tls.curve_types: []
 
   #------------------------------- File output ----------------------------------
-output.file:
+#output.file:
   # Boolean flag to enable or disable the output module.
-  enabled: true
+#  enabled: true
 
   # Path to the directory where to save the generated files. The option is
   # mandatory.
-  path: "/tmp/filebeat"
+#  path: "/tmp/filebeat"
 
   # Name of the generated files. The default is `filebeat` and it generates
   # files: `filebeat`, `filebeat.1`, `filebeat.2`, etc.
